@@ -612,7 +612,7 @@ function setup(){
   $('selectAllBtn').onclick=()=>{S.trialMode='complex';S.selected=Object.fromEntries(SEQ.map(id=>[id,true]));$('trialPreset').value='custom';renderCosts();};
   $('selectNoneBtn').onclick=()=>{S.selected={};renderCosts();};
   $('printBtn').onclick=()=>window.print();
-  $('saveBtn').onclick=()=>download('특순통치_상담사례_v7.json',JSON.stringify({version:'7.0',state:{...S,costs:{},days:{REHAB_IN:1,REHAB_OUT:1}}},null,2),'application/json');
+  $('saveBtn').onclick=()=>download('특순통치_상담사례_시험버전_T1.json',JSON.stringify({version:'9.1-T1',state:{...S,costs:{}}},null,2),'application/json');
   $('loadBtn').onclick=()=>$('file').click();
   $('file').onchange=async e=>{
     if(!e.target.files?.[0])return;
@@ -623,12 +623,12 @@ function setup(){
         const allowed=p==='expanded'?[0,2000,3000]:[0,2000,3000,5000,8000,10000];
         if(!allowed.includes(Number(st.plans[p])))throw Error(p+' 가입금액 오류');
       }
-      S={...blank(),...st,plans:{...blank().plans,...st.plans},selected:{...st.selected},costs:{},days:{REHAB_IN:1,REHAB_OUT:1}};
+      S={...blank(),...st,plans:{...blank().plans,...st.plans},selected:{...st.selected},costs:{},days:{...blank().days,...st.days},treatmentDays:{...TRIAL_DAY_BASE,...st.treatmentDays}};
       S.scenario=['standard','expanded'].includes(S.scenario)?S.scenario:'standard';
       S.injuryCase=['disease','injury'].includes(S.injuryCase)?S.injuryCase:'disease';
       S.period=['before','after'].includes(S.period)?S.period:'after';
       S.grade=[1,2,3,4,5].includes(Number(S.grade))?Number(S.grade):3;
-      S.eligibleUpper=true;S.noOverlap=true;S.trialMode=['single','complex'].includes(S.trialMode)?S.trialMode:'single';S.treatmentDays={...TRIAL_DAY_BASE,...S.treatmentDays};if(Object.values(S.selected).filter(Boolean).length>1)S.trialMode='complex';
+      S.eligibleUpper=true;S.noOverlap=true;S.trialMode=['single','complex'].includes(S.trialMode)?S.trialMode:'single';S.treatmentDays={...TRIAL_DAY_BASE,...S.treatmentDays};for(const id of ['REHAB_IN','REHAB_OUT'])S.days[id]=Math.min(15,Math.max(1,Number(S.days[id])||1));if(Object.values(S.selected).filter(Boolean).length>1)S.trialMode='complex';
       buildPlans();$('period').value=S.period;$('grade').value=String(S.grade);$('injuryCase').value=S.injuryCase;render();
     }catch(err){alert('불러오기 실패: '+err.message);}finally{e.target.value='';}
   };
