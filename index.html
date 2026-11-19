@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.2 · 특순통치</title>
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.3 · 특순통치</title>
 <style>.nonpay-tip{display:block;color:#856752;font-size:10px;line-height:1.5;margin-top:5px;max-width:210px;border-top:1px dashed #e7d9c4;padding-top:5px}.nonpay-proof{color:#8c624a;margin-top:6px;font-size:11px;line-height:1.5;padding:6px 8px;border-left:2px solid #dfb39c;background:#fcf7f1}.cost-method{min-width:210px}
 
 :root{--red:#ef3b24;--redsoft:#fff0eb;--ink:#1d2b3c;--muted:#657387;--line:#e2e7ef;--bg:#f5f7fa;--white:#fff;--soft:#f8fafc;--green:#0f766e;--warn:#b45309}
@@ -290,9 +290,34 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .summary-sheet .rs-comp-table td{padding:5px 4px;line-height:1.19}
 .summary-sheet .rs-comp-table small{font-size:7.4px;line-height:1.16}
 
+
+/* STEP 3 간편 비교 */
+.simple-inputs{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:0 0 14px}
+.simple-select{width:100%;background:#fff;border:1px solid #cfd8e5;border-radius:9px;padding:11px 12px;color:var(--ink)}
+.simple-benefit{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff5f1;border:1px solid #f6c7bb;border-radius:13px;padding:18px 21px;margin:0 0 15px}
+.simple-benefit span{display:block;font-weight:750;color:#7b4237;font-size:14px}
+.simple-benefit small{display:block;font-size:11px;color:#936d67;margin-top:4px}
+.simple-benefit strong{font-size:28px;white-space:nowrap;color:#c83822;letter-spacing:-.6px}
+.simple-cost-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.simple-case{border:1px solid var(--line);border-radius:12px;padding:17px 18px;background:#fff}
+.simple-case.high{background:#fafbfd}
+.simple-case-header{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:12px}
+.simple-case-header b{font-size:16px}
+.simple-case-header span{font-size:11px;color:#657387}
+.simple-case-cost{padding-bottom:14px;border-bottom:1px solid #e9edf1}
+.simple-case-cost small{display:block;color:#637184;font-size:12px}
+.simple-case-cost strong{font-size:27px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.simple-case-rows{display:grid;gap:10px;margin-top:14px}
+.simple-case-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.simple-case-row span{font-size:12px;color:#53657a}
+.simple-case-row strong{font-size:19px;white-space:nowrap}
+.simple-case-row .special{color:#c73d27}
+.simple-help{font-size:12px;color:#657387;line-height:1.6;margin:14px 0}
+.simple-details{margin-top:6px}
+@media(max-width:740px){.simple-inputs,.simple-cost-grid{grid-template-columns:1fr}.simple-benefit{padding:15px}.simple-benefit strong{font-size:23px}.simple-case{padding:16px}.simple-case-cost strong{font-size:24px}}
 </style></head><body>
 <div class="top"><div class="top-inner"><div class="brand">보험 <em>· 특순통치</em> / MERITZ FIRE &amp; MARINE</div><div class="maker">오선근 CM</div></div></div>
-<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 일반·고액 치료비 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.2 · 3단계</div></div></div>
+<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 치료비 간편 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.3 · 3단계</div></div></div>
 <nav class="quick no-print"><a href="#step1"><b>STEP 01</b>담보 선택·보장범위</a><a href="#step2"><b>STEP 02</b>행위별 보장금액</a><a href="#step3"><b>STEP 03</b>치료비 비교</a></nav>
 <section id="step1" class="step"><div class="stephead"><h2><span>STEP 01</span>담보 선택</h2><span class="muted">가입금액 선택 즉시 보장코드가 표시됩니다</span></div>
 <div id="planGrid" class="plan-grid"></div><div id="limitNotice" role="status"></div>
@@ -309,19 +334,21 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 <div class="note warn">지급금액은 첨부된 3개 PDF 약관표를 우선 적용했습니다. 첨부 원본 엑셀의 일부 금액과 차이가 있어, 실제 계약 상품코드·가입시점·적용 약관과 대조해야 합니다. 일반·상급형의 동시가입 각각 5천만원 한도는 원본 엑셀 운영규칙이며 최신 인수지침 확인이 필요합니다.</div>
 </section>
 <section id="step3" class="step">
-<div class="stephead"><h2><span>STEP 03</span>일반·고액 치료비와 정액보험금 비교</h2><span class="muted">교육용 기준표 · 입원 1건 우선</span></div>
-<div class="note" style="margin:0 0 14px"><strong>비교 기준:</strong> 실측 입원비와 교육용 추정값을 구분합니다. 고액 사례는 실측 P75 또는 평균×1.5 가정입니다. CRRT는 공단 지급액 역산, 저체온요법은 ICU 대리통계입니다. 검사·외래는 1회 또는 치료횟수 기준입니다. <strong>산정특례 비교는 비용 전체가 대상 급여라는 가정 아래의 산술 결과이며 실제 환자부담금이 아닙니다.</strong></div>
-<div class="assumption-strip">
-<div class="field"><label for="coverageScenario">보험금 적용 보장범위</label><select id="coverageScenario"><option value="standard">일반형·상급형 대상 질병</option><option value="expanded">주요손상및질환형 대상 질병·상해</option></select></div>
-<div class="field"><label for="costTier">치료비 사례</label><select id="costTier"><option value="normal">일반 사례</option><option value="high">고액 사례</option></select></div>
-<div class="field"><label for="copayMode">환자부담 비교조건</label><select id="copayMode"><option value="special">산특 적용 가정(급여 5%)</option><option value="ordinary">산특 미적용(입원 20%)</option></select><small>검사 미적용 60%·외래재활 40% 비교 가정</small></div>
+<div class="stephead"><h2><span>STEP 03</span>치료비와 보험금 비교</h2><span class="muted">치료 1개 선택 · 결과 자동 계산</span></div>
+<div class="simple-inputs">
+<div class="field"><label for="focusTreatment">치료항목 선택</label><select id="focusTreatment" class="simple-select"></select></div>
+<div class="field"><label for="coverageScenario">보험금 계산 담보</label><select id="coverageScenario" class="simple-select"><option value="standard">일반형 + 상급형</option><option value="expanded">주요손상및질환형</option></select></div>
 </div>
-<div class="compare-head no-print"><div class="inlinemenu"><button class="btn" id="selectAllBtn">전체 항목 선택</button><button class="btn" id="selectNoneBtn">선택 해제</button><span id="selectionCount" class="selection-count">0/12개 선택</span></div><span class="muted">단위: 만원 · 참고값</span></div>
-<div id="costSections" class="category-tables"></div><div class="legacy-table" aria-hidden="true"><table class="t cost-compare-table"><thead><tr><th>행위</th><th>기간·근거</th><th>일반 치료비</th><th>고액 치료비</th><th>선택 사례 환자부담</th><th>보험금</th><th>보험금−환자부담</th></tr></thead><tbody id="costBody"></tbody></table></div>
-<div class="notice-row"><div class="note"><strong>입원비 중복 주의:</strong> CRRT·ECMO·인공호흡기·중환자실·입원재활이 같은 입원에서 시행될 수 있습니다. 입원 항목 포함 복수 선택 시 환자부담금 합계·차액을 합산하지 않습니다.</div><div class="note warn"><strong>산정특례:</strong> 대상 질환·기간·급여 요건을 충족할 때만 적용됩니다. 비급여·선별급여 등은 위 부담률로 계산되지 않습니다. 정액보험금은 STEP 2 약관 지급요건 충족을 가정합니다.</div></div>
-<div class="stats totals"><div class="stat"><small>선택행 정액보험금 합계</small><b id="totalBenefit">0만원</b></div><div class="stat"><small>선택행 환자부담금 가정</small><b id="totalCost">—</b></div><div class="stat main"><small>보험금 − 환자부담금 가정</small><b id="totalDiff">—</b></div></div>
-<div id="resultFoot"></div><div class="report"><h3>상담 요약</h3><div id="reportRows"></div></div>
-<details class="codes"><summary>치료비 기준과 원자료 확인</summary><div class="table-scroll" style="margin-top:10px"><table class="proof-table"><thead><tr><th>행위</th><th>일반 / 고액</th><th>비용 범위</th><th>출처</th></tr></thead><tbody id="proofBody"></tbody></table></div></details>
+<div class="simple-benefit"><div><span>STEP 2 예상 정액보험금</span><small>가입한 담보의 약관상 지급요건 충족 가정</small></div><strong id="singleBenefit">—</strong></div>
+<div id="simpleCompare" class="simple-cost-grid" aria-live="polite"></div>
+<p class="simple-help">산특 적용·미적용 금액은 급여 전액에 가정 부담률을 적용한 교육용 계산입니다. 실제 환자부담액과 다를 수 있습니다.</p>
+<details class="codes simple-details"><summary>치료비 근거·계산기준 자세히 보기</summary>
+<div id="simpleProof" class="smallprint" style="margin-top:12px"></div>
+<p class="smallprint">일반 사례: P50 또는 평균. 고액 사례: 실측 P75 또는 평균×1.5 교육용 가정. CRRT는 공단 지급액을 환산한 비용 모델, 저체온요법은 ICU 환자군 대리통계입니다. 산특 대상 질환·기간·급여요건은 별도 확인해야 합니다.</p>
+<div class="table-scroll" style="margin-top:10px"><table class="proof-table"><thead><tr><th>치료항목</th><th>일반/고액</th><th>근거 범위</th><th>출처</th></tr></thead><tbody id="proofBody"></tbody></table></div>
+</details>
+</section>
+
 </section>
 
 <div class="bottom-actions no-print"><button class="btn primary" id="summaryBtn" type="button">요약정리</button><button class="btn" id="printBtn">인쇄 · PDF 저장</button><button class="btn" id="saveBtn">사례 저장(JSON)</button><button class="btn" id="loadBtn">사례 불러오기</button><input type="file" id="file" accept=".json,application/json" hidden><button class="btn" id="resetBtn">전체 초기화</button><span id="toast" class="copyStatus"></span></div>
@@ -386,7 +413,7 @@ function costScenario(id){
  return {r,gross,rate,burden:Math.round(gross*rate*10)/10};
 }
 function costOverlaps(ids){return ids.length>1&&ids.some(id=>STEP3_DATA[id].kind==='inpatient');}
-const blank=()=>({plans:{normal:5000,upper:5000,expanded:0},period:'after',grade:3,injuryCase:'disease',eligibleUpper:true,selected:{},costs:{},days:{REHAB_IN:1,REHAB_OUT:1},noOverlap:true,scenario:'standard',costTier:'normal',copayMode:'special'});
+const blank=()=>({plans:{normal:5000,upper:5000,expanded:0},period:'after',grade:3,injuryCase:'disease',eligibleUpper:true,selected:{CRRT:true},costs:{},days:{REHAB_IN:1,REHAB_OUT:1},noOverlap:true,scenario:'standard',costTier:'normal',copayMode:'special'});
 let S=blank();
 const $=id=>document.getElementById(id),fmt=n=>Number(n||0).toLocaleString('ko-KR',{maximumFractionDigits:2}),money=n=>fmt(n)+'만원',escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function validCombo(){const a=S.plans;return !(a.normal>0&&a.upper>0&&(a.normal>5000||a.upper>5000));}
@@ -450,36 +477,23 @@ function refView(r){
 }
 
 function renderCosts(){
- const x=sim(),family=S.scenario==='standard'?'일반형·상급형':'주요손상및질환형';
- $('coverageScenario').value=S.scenario;$('costTier').value=S.costTier;$('copayMode').value=S.copayMode;
- let html='',group='';
- for(const id of SEQ){
-  const it=ITEMS.find(q=>q.id===id),c=costScenario(id),r=c.r,selected=!!S.selected[id];
-  if(it.group!==group){group=it.group;html+=`<tr class="group"><td colspan="7">${escapeHTML(group)}</td></tr>`;}
-  const pay=selected?x.rows[id].pay:benefitPreview(id).amount,diff=Math.round((pay-c.burden)*10)/10;
-  html+=`<tr class="${selected?'chosen':''}"><td><label class="checklabel"><input class="rowcheck" type="checkbox" data-check="${id}" ${selected?'checked':''}><b>${escapeHTML(it.name)}</b></label></td>`;
-  html+=`<td><b>${escapeHTML(r.period)}</b><span class="cost-label">${escapeHTML(r.basis)} · ${escapeHTML(r.upper)}</span></td>`;
-  html+=`<td><strong class="pay-amount">${money(r.normal)}</strong></td><td><strong class="pay-amount">${money(r.high)}</strong></td>`;
-  html+=`<td><strong class="pay-amount">${money(c.burden)}</strong><span class="cost-label">${S.costTier==='high'?'고액':'일반'} ${money(c.gross)} × ${(c.rate*100).toFixed(0)}% (가정)</span></td>`;
-  html+=`<td><strong class="pay-amount">${money(pay)}</strong></td><td><strong class="${diff>=0?'positive-text':'negative-text'}">${money(diff)}</strong></td></tr>`;
- }
- $('costBody').innerHTML=html;paintCategoryTables('costBody','costSections');
- $('selectionCount').textContent=`${x.selectedIds.length}/${SEQ.length}개 선택`;
- $('totalBenefit').textContent=money(x.total);$('totalCost').textContent=x.canSum?money(x.totalCost):'합산 제외';
- $('totalDiff').textContent=x.canSum?money(Math.round((x.total-x.totalCost)*10)/10):'합산 제외';
- const notes=[];
- if(!validCombo())notes.push('가입한도 초과: 보험금 계산 차단');
- if(x.capHits.length)notes.push('연간 한도 초과: 화면 순서대로 보험금 잔여한도 차감한 교육용 산출');
- if(costOverlaps(x.selectedIds))notes.push('입원치료가 포함된 복수 선택: 치료별 입원비가 중복될 수 있으므로 총 환자부담금과 차액을 합산하지 않습니다.');
- if(!x.selectedIds.length)notes.push('한 치료행위를 선택하면 해당 환자부담 가정과 STEP 2 보험금을 비교합니다.');
- notes.push('산특은 대상 질환·적용기간·급여 인정요건을 충족할 때만 적용됩니다. 모든 진료비가 급여라는 비교 가정은 실제 청구액이 아닙니다.');
- $('resultFoot').innerHTML=`<div class="note">${notes.map(t=>'<div>'+escapeHTML(t)+'</div>').join('')}</div>`;
- const line=(a,b)=>`<div class="detail"><span>${escapeHTML(a)}</span><b>${b}</b></div>`;
- $('reportRows').innerHTML=line('가입 담보',`일반 ${money(S.plans.normal)} · 상급 ${money(S.plans.upper)} · 주요손상 ${money(S.plans.expanded)}`)+
-  line('비교 대상',family)+line('선택 사례',`${S.costTier==='high'?'고액':'일반'} · ${S.copayMode==='special'?'산특':'미적용'} 가정`)+
-  line('선택행 예상 정액보험금',money(x.total))+line('선택행 환자부담 가정',x.canSum?money(x.totalCost):'합산 제외')+
-  line('주의','실제 보험금 지급확정액·환자 본인부담금 아님');
- document.querySelectorAll('[data-check]').forEach(el=>el.onchange=()=>{S.selected[el.dataset.check]=el.checked;renderCosts();});
+ let id=SEQ.find(k=>S.selected[k])||'CRRT';
+ S.selected={[id]:true};
+ const item=ITEMS.find(x=>x.id===id),r=STEP3_DATA[id],result=sim(),pay=result.rows[id].pay;
+ const specialRate=r.kind==='outpatient'?null:0.05;
+ const ordinaryRate=r.kind==='test'?0.60:r.kind==='outpatient'?0.40:0.20;
+ $('focusTreatment').value=id;$('coverageScenario').value=S.scenario;
+ $('singleBenefit').textContent=money(pay);
+ const card=(tier,gross,label)=>`<div class="simple-case ${tier==='고액 사례'?'high':''}">
+  <div class="simple-case-header"><b>${tier}</b><span>${escapeHTML(label)}</span></div>
+  <div class="simple-case-cost"><small>참고 치료비</small><strong>${money(gross)}</strong></div>
+  <div class="simple-case-rows">
+   <div class="simple-case-row"><span>${specialRate===null?'산특 비교':'산특 적용 가정 (5%)'}</span><strong class="special">${specialRate===null?'비적용':money(Math.round(gross*specialRate*10)/10)}</strong></div>
+   <div class="simple-case-row"><span>산특 미적용 가정 (${Math.round(ordinaryRate*100)}%)</span><strong>${money(Math.round(gross*ordinaryRate*10)/10)}</strong></div>
+  </div>
+ </div>`;
+ $('simpleCompare').innerHTML=card('일반 사례',r.normal,r.basis)+card('고액 사례',r.high,r.upper);
+ $('simpleProof').innerHTML=`<strong>${escapeHTML(item.name)}</strong> · ${escapeHTML(r.period)}<p>${escapeHTML(r.scope)}</p><p><a href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">원자료 보기</a></p>`;
 }
 function buildProof(){
  $('proofBody').innerHTML=SEQ.map(id=>{
@@ -529,11 +543,9 @@ function setup(){
   $('period').onchange=e=>{S.period=e.target.value;render();};
   $('grade').onchange=e=>{S.grade=Number(e.target.value);render();};
   $('injuryCase').onchange=e=>{S.injuryCase=e.target.value;render();};
+  $('focusTreatment').innerHTML=ITEMS.map(x=>`<option value="${x.id}">${escapeHTML(x.name)}</option>`).join('');
+  $('focusTreatment').onchange=e=>{S.selected={[e.target.value]:true};renderCosts();};
   $('coverageScenario').onchange=e=>{S.scenario=e.target.value;renderCosts();};
-   $('costTier').onchange=e=>{S.costTier=e.target.value;renderCosts();};
-   $('copayMode').onchange=e=>{S.copayMode=e.target.value;renderCosts();};
-  $('selectAllBtn').onclick=()=>{S.selected=Object.fromEntries(SEQ.map(id=>[id,true]));renderCosts();};
-  $('selectNoneBtn').onclick=()=>{S.selected={};renderCosts();};
   $('printBtn').onclick=()=>window.print();
   $('saveBtn').onclick=()=>download('특순통치_상담사례_v7.json',JSON.stringify({version:'7.0',state:{...S,costs:{},days:{REHAB_IN:1,REHAB_OUT:1}}},null,2),'application/json');
   $('loadBtn').onclick=()=>$('file').click();
@@ -548,6 +560,7 @@ function setup(){
       }
       S={...blank(),...st,plans:{...blank().plans,...st.plans},selected:{...st.selected},costs:{},days:{REHAB_IN:1,REHAB_OUT:1}};
       S.scenario=['standard','expanded'].includes(S.scenario)?S.scenario:'standard';
+      S.selected={[SEQ.find(id=>S.selected[id])||'CRRT']:true};
       S.injuryCase=['disease','injury'].includes(S.injuryCase)?S.injuryCase:'disease';
       S.period=['before','after'].includes(S.period)?S.period:'after';
        S.costTier=['normal','high'].includes(S.costTier)?S.costTier:'normal';
