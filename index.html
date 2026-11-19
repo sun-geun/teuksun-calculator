@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.5 · 특순통치</title>
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.6 · 특순통치</title>
 <style>.nonpay-tip{display:block;color:#856752;font-size:10px;line-height:1.5;margin-top:5px;max-width:210px;border-top:1px dashed #e7d9c4;padding-top:5px}.nonpay-proof{color:#8c624a;margin-top:6px;font-size:11px;line-height:1.5;padding:6px 8px;border-left:2px solid #dfb39c;background:#fcf7f1}.cost-method{min-width:210px}
 
 :root{--red:#ef3b24;--redsoft:#fff0eb;--ink:#1d2b3c;--muted:#657387;--line:#e2e7ef;--bg:#f5f7fa;--white:#fff;--soft:#f8fafc;--green:#0f766e;--warn:#b45309}
@@ -16,7 +16,7 @@ button,input,select{font:inherit}button{cursor:pointer}input:focus,select:focus,
 @media(max-width:800px){.shell{padding:20px 12px 50px}.intro h1{font-size:24px}.step{padding:18px 12px}.plan-grid,.basic,.notice-row{grid-template-columns:1fr}.plan .plan-sub{min-height:auto}.quick a{font-size:11px;padding:11px 8px}.quick b{display:block;margin:0}.stats{grid-template-columns:1fr}.codes .dual{grid-template-columns:1fr}.stephead{align-items:flex-start}.t{font-size:12px}.t td,.t th{padding:10px 9px}.costbox{max-width:90px}.top-inner{padding:12px}.maker{display:none}}
 @media print{body{background:white}.top,.quick,.bottom-actions,.codes,.no-print,.mini-controls{display:none!important}.shell{padding:5px;max-width:none}.step{box-shadow:none;break-inside:avoid;padding:14px;border-color:#ddd;margin-bottom:10px}.stephead{margin-bottom:10px}.stephead h2{font-size:15px}.intro{margin-bottom:6px}.intro h1{font-size:20px}.t{font-size:10px}.t td,.t th{padding:5px}.field input,.field select,.plan select{border:0}.t th:first-child,.t td:first-child{position:static}.stats{gap:5px}.stat{padding:8px}.stat b{font-size:17px}}
 
-/* v3 재구성: 가입담보별 코드 범위 자동 노출, 진단코드 입력 제거, 자동 기준비용 */
+
 .coverage-area{margin-top:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.range-card{padding:15px;border:1px solid var(--line);border-radius:12px;background:#fcfdff}.range-card.active{border-color:#efab9e;background:#fffaf7}.range-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px}.range-head h3{font-size:15px;margin:0}.range-head .count{font-size:12px;color:var(--muted);white-space:nowrap}.range-preview{font-size:12px;color:#40546a;margin-bottom:8px}.scope-groups{max-height:280px;overflow-y:auto;padding-right:5px}.scope-group{border-top:1px solid #e7ebf0;padding-top:8px;margin-top:9px}.scope-group strong{display:block;font-size:12px;color:#596b82;margin-bottom:6px}.scope-items{display:flex;flex-wrap:wrap;gap:5px}.scope-code{background:#fff;border:1px solid #e3e9f0;border-radius:6px;padding:4px 6px;font-size:11px;line-height:1.4;color:#33465c}.scope-code b{color:#ca3926;margin-right:4px}.smallprint{font-size:11px;color:#748296;line-height:1.65}.tag{display:inline-block;font-size:10px;font-weight:800;border-radius:5px;padding:2px 5px;background:#edf2f8;color:#475c79;margin-right:5px}.tag.grade-C{background:#fff1da;color:#895315}.tag.grade-D{background:#fff0ef;color:#a02d21}.range-empty{color:#8793a4;font-size:12px;padding:20px 4px}.meta-lines{line-height:1.6;font-size:12px;color:#5e6d80}.meta-lines a{color:#bd3827;text-decoration:underline}.costbox.edited{background:#fff7f1;border-color:#eca894}.toggle-line{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.subnote{font-size:11px;color:var(--muted);margin:5px 0 0}.cost-method{color:#53667d;font-size:11px;white-space:normal;min-width:160px}.t td.vertical-top{vertical-align:top}.t .nowrap{white-space:nowrap}.cost-label{font-size:10px;white-space:normal;color:#708098;display:block;max-width:200px}.summary-note{font-size:11px;color:#667991}.assumption-strip{margin:8px 0 14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}.assumption-strip .field{min-width:190px}.assumption-strip select{border:1px solid #ccd5e0;border-radius:8px;padding:7px 10px;background:white}.text-wrap{white-space:normal;min-width:230px}.plan .scope-hint{font-size:12px;margin:12px 0 0;color:#b33a2b;font-weight:700}.scope-key{margin:8px 0;font-size:12px;color:#334f68}.t .longrule{font-size:11px;color:#637184;white-space:normal;min-width:160px}.proof-table{width:100%;border-collapse:collapse;font-size:12px}.proof-table td,.proof-table th{text-align:left;padding:9px;border-bottom:1px solid var(--line);vertical-align:top}.proof-table th{color:#55687c;background:#f7f9fc}.proof-table a{color:#b53a2d}.proof-table td:first-child{font-weight:700;min-width:100px}.stat b{font-variant-numeric:tabular-nums}
 @media(max-width:850px){.coverage-area{grid-template-columns:1fr}.scope-groups{max-height:260px}.assumption-strip .field{min-width:150px}.t .cost-method{min-width:145px}}
 @media print{.scope-groups{max-height:none;overflow:visible}.coverage-area{grid-template-columns:repeat(2,1fr)}.proof-table{font-size:10px}.coverage-area .scope-code{font-size:9px}.scope-key,.range-card{break-inside:avoid}}
@@ -33,7 +33,7 @@ button,input,select{font:inherit}button{cursor:pointer}input:focus,select:focus,
 .cost-compare-table .rowcheck{margin-top:4px}
 @media(max-width:680px){.cost-compare-table{min-width:1030px}.cost-compare-table td{padding:11px 8px}.assumption-strip{align-items:start}}
 
-/* v7: 전체 선택 및 세로 스크롤 시 비교항목을 놓치지 않도록 표 머리글 안내 고정 */
+
 .sticky-compare-guide{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;margin:0 0 9px;background:rgba(255,255,255,.97);border:1px solid #e2e7ef;border-left:3px solid var(--red);border-radius:9px;box-shadow:0 3px 11px rgba(29,43,60,.07)}
 .sticky-compare-guide strong{font-size:12px;color:#a93222;white-space:nowrap}
 .sticky-compare-guide .headers{display:flex;gap:5px 9px;align-items:center;flex-wrap:wrap;font-size:11px;color:#4d5b6e}
@@ -45,9 +45,7 @@ button,input,select{font:inherit}button{cursor:pointer}input:focus,select:focus,
 @media(max-width:680px){.sticky-compare-guide{top:0;padding:9px}.sticky-compare-guide .headers{font-size:10px}.sticky-compare-guide .headers span{padding:2px 5px}}
 @media print{.sticky-compare-guide{position:static;box-shadow:none}.cost-compare-table tr.column-repeat{display:none}}
 
-/* ======================== v8 DESIGN ONLY ========================
-   암통치 확정 화면의 카드/분류별 비교표 구조에 맞춰 재구성.
-   기존 v7 수식·약관 데이터·입력값·저장 형식 유지. */
+
 :root{--bg:#f5f6f9;--ink:#202939;--muted:#687588;--line:#dfe5ed;--red:#EF3B24;--redsoft:#fff1ee;--soft:#f8fafc}
 body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .top{border-bottom:1px solid #eceef2;background:#fff}
@@ -119,7 +117,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .category-block .rowtotal{color:#c23b29}
 .table-mobile-note{display:none;font-size:10px;color:#8b97a6;padding:7px 12px;background:#f8fafc;border-top:1px solid #edf1f4}
 .legacy-table{display:none!important}
-.sticky-compare-guide{display:none!important} /* 매 카테고리 머리글로 대체 */
+.sticky-compare-guide{display:none!important} 
 .compare-head .inlinemenu{gap:8px}
 .btn{min-height:36px;border-radius:8px;border:1px solid #dce2eb;font-size:12px;padding:8px 12px}
 .btn:hover{border-color:#b6c0cd}
@@ -185,7 +183,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 }
 
 
-/* v9 요약정리: 계산기 원본 레이아웃/산식과 독립된 출력 전용 스타일 */
+
 .intro-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
 .summary-launch{padding:9px 17px;font-weight:800}
 .summary-overlay[hidden]{display:none!important}
@@ -260,7 +258,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
  body.print-summary .summary-sheet{width:210mm!important;height:297mm!important;box-shadow:none!important;transform:none!important;overflow:hidden!important;margin:0!important;page-break-after:always;break-after:page;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
  body.print-summary .summary-sheet:last-child{page-break-after:auto;break-after:auto}
 }
-/* A4 정확히 두 면에 맞춘 요약정리 밀도 조정 */
+
 .summary-sheet .rs-eyebrow{margin-top:13px}
 .summary-sheet .rs-title{font-size:23px;margin:2px 0}
 .summary-sheet .rs-subtitle{margin-bottom:9px}
@@ -282,7 +280,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .summary-sheet .rs-total>div{padding:8px}
 .summary-sheet .rs-total b{font-size:16px}
 
-/* 가독성 복구: 잘림 없이 A4 2페이지 안에서 행·숫자 확대 */
+
 .summary-sheet .rs-table{font-size:10px}
 .summary-sheet .rs-table td{padding:5px 5px;line-height:1.25}
 .summary-sheet .rs-table td small{font-size:7.8px;line-height:1.22}
@@ -291,7 +289,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .summary-sheet .rs-comp-table small{font-size:7.4px;line-height:1.16}
 
 
-/* STEP 3 간편 비교 */
+
 .simple-inputs{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:0 0 14px}
 .simple-select{width:100%;background:#fff;border:1px solid #cfd8e5;border-radius:9px;padding:11px 12px;color:var(--ink)}
 .simple-benefit{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff5f1;border:1px solid #f6c7bb;border-radius:13px;padding:18px 21px;margin:0 0 15px}
@@ -336,21 +334,21 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 @media(max-width:740px){.simple-inputs,.simple-cost-grid{grid-template-columns:1fr}.simple-benefit{padding:15px}.simple-benefit strong{font-size:23px}.simple-case{padding:16px}.simple-case-cost strong{font-size:24px}}
 </style></head><body>
 <div class="top"><div class="top-inner"><div class="brand">보험 <em>· 특순통치</em> / MERITZ FIRE &amp; MARINE</div><div class="maker">오선근 CM</div></div></div>
-<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 치료비 간편 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.5 · 3단계</div></div></div>
+<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 치료비 간편 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.6 · 3단계</div></div></div>
 <nav class="quick no-print"><a href="#step1"><b>STEP 01</b>담보 선택·보장범위</a><a href="#step2"><b>STEP 02</b>행위별 보장금액</a><a href="#step3"><b>STEP 03</b>치료비 비교</a></nav>
 <section id="step1" class="step"><div class="stephead"><h2><span>STEP 01</span>담보 선택</h2><span class="muted">가입금액 선택 즉시 보장코드가 표시됩니다</span></div>
 <div id="planGrid" class="plan-grid"></div><div id="limitNotice" role="status"></div>
-<div class="coverage-area"><div class="range-card" id="normalCoverage"><div class="range-head"><h3>일반형 · 상급형 보장범위</h3><span class="count">별표46 · 52개 분류코드</span></div><div class="range-preview">뇌경색·뇌출혈·협심증·심근경색·부정맥 등</div><div id="stdCodeList"></div></div>
-<div class="range-card" id="expandedCoverage"><div class="range-head"><h3>주요손상및질환형 보장범위</h3><span class="count">별표65 · 40개 분류코드</span></div><div class="range-preview">고혈압·죽상경화증·1도 방실차단·S06/S25/S26 등</div><div id="expCodeList"></div></div></div>
-<div class="note" style="margin-top:11px"><strong>보장범위 차이:</strong> 일반형·상급형은 동일한 별표46, 주요손상및질환형은 별도 별표65를 적용합니다. 예를 들어 I63 뇌경색은 일반·상급형, I10 고혈압·I70 죽상경화증·S06 두개내손상은 주요손상및질환형 대상입니다. 이 화면은 진단코드 입력을 요구하지 않으며, 약관 표의 분류 범위를 보여줍니다.</div>
-<p class="smallprint">출처: 첨부 「특순통치(1)」·「상급특순통치」 별표46 및 「특순통치 주요손상」 별표65. 제9차 KCD(2026.1.1 시행). 코드는 분류표 기준이며 진단 사실·수술/치료 정의·개별 약관 확인이 있어야 보험금이 확정됩니다.</p>
+<div class="coverage-area"><div class="range-card" id="normalCoverage"><div class="range-head"><h3>일반형 · 상급형 보장범위</h3><span class="count">보장대상 52개 분류코드</span></div><div class="range-preview">뇌경색·뇌출혈·협심증·심근경색·부정맥 등</div><div id="stdCodeList"></div></div>
+<div class="range-card" id="expandedCoverage"><div class="range-head"><h3>주요손상및질환형 보장범위</h3><span class="count">보장대상 40개 분류코드</span></div><div class="range-preview">고혈압·죽상경화증·1도 방실차단·S06/S25/S26 등</div><div id="expCodeList"></div></div></div>
+<div class="note" style="margin-top:11px"><strong>보장범위 차이:</strong> 일반형·상급형과 주요손상및질환형은 약관에서 정한 보장대상 질병·상해의 범위가 다릅니다. 예를 들어 I63 뇌경색은 일반형·상급형, I10 고혈압·I70 죽상경화증·S06 두개내손상은 주요손상및질환형의 분류 예시입니다. 실제 보장 여부는 가입한 특약의 지급요건에 따라 달라집니다.</div>
+<p class="smallprint">보장분류 참고: 가입한 특약의 대상 질병·상해 분류기준과 제9차 KCD(2026.1.1 시행). 진단코드만으로 지급이 확정되지는 않으며, 실제 진단·치료내용과 개별 약관의 지급요건을 확인해야 합니다.</p>
 </section>
 <section id="step2" class="step"><div class="stephead"><h2><span>STEP 02</span>각 행위별 보장금액</h2><span class="muted">진단명 입력 없이 가입금액별 약관 지급표 산출</span></div>
 <div class="assumption-strip"><div class="field"><label for="period">보험 계약 경과</label><select id="period"><option value="after">1년 경과 후 (일반 100%)</option><option value="before">1년 경과 전 (일반 50%)</option></select></div><div class="field"><label for="grade">주요손상형 수술종수</label><select id="grade"><option value="1">1종</option><option value="2">2종</option><option value="3">3종</option><option value="4">4종</option><option value="5">5종</option></select></div><div class="field"><label for="injuryCase">주요손상형 적용 질병군</label><select id="injuryCase"><option value="disease">순환계 질환(I코드) · 일반 지급표</option><option value="injury">주요손상(S06·S25·S26) · 별도 지급표</option></select><div class="smallprint">I코드 질환은 가입 첫 1년 50% 적용, S06·S25·S26은 별도 지급표로 첫해에도 감액 없이 계산합니다.</div></div></div>
 <div class="note" style="margin:0 0 13px"><strong>보장금액표:</strong> 선택한 각 담보의 가입금액에 따라 약관상 치료행위별 정액 지급금액을 표시합니다. 해당 담보의 대상 상병, 치료의 직접 목적, 급여·수술 정의 등 <strong>모든 지급요건 충족을 가정한 조건부 금액</strong>입니다. 상급형은 상급종합병원·권역센터 치료 시에만 표시 금액이 지급후보입니다. 행별 금액은 연간 총지급액이 아닙니다.</div>
 <div id="benefitSections" class="category-tables" aria-label="행위별 보장금액: 카테고리별 표"></div><div class="legacy-table" aria-hidden="true"><table class="t"><thead><tr><th style="min-width:235px">검사·주요치료·수술·재활</th><th>일반형</th><th>상급형</th><th>주요손상형</th><th>보장범위별 금액(합산 구분)</th><th style="min-width:145px">약관 지급단위</th></tr></thead><tbody id="benefitBody"></tbody></table></div>
 <div class="stats"><div class="stat"><small>일반형 연간 총지급한도</small><b id="capNormal">—</b></div><div class="stat"><small>상급형 연간 총지급한도</small><b id="capUpper">—</b></div><div class="stat"><small>주요손상형 연간 총지급한도</small><b id="capExpanded">—</b></div></div><p class="smallprint" id="rateFoot"></p>
-<div class="note warn">지급금액은 첨부된 3개 PDF 약관표를 우선 적용했습니다. 첨부 원본 엑셀의 일부 금액과 차이가 있어, 실제 계약 상품코드·가입시점·적용 약관과 대조해야 합니다. 일반·상급형의 동시가입 각각 5천만원 한도는 원본 엑셀 운영규칙이며 최신 인수지침 확인이 필요합니다.</div>
+<div class="note warn">표시된 보장금액은 약관상 지급요건을 충족한 경우의 참고금액입니다. 가입한 상품·가입시점에 따라 지급기준이 달라질 수 있으므로 실제 계약 약관과 대조해야 합니다. 동시가입 금액 제한과 실제 가입 가능 여부는 해당 상품의 최신 인수기준을 확인하십시오.</div>
 </section>
 <section id="step3" class="step">
 <div class="stephead"><h2><span>STEP 03</span>치료비와 보험금 비교</h2><span class="muted">치료 1개 선택 · 결과 자동 계산</span></div>
@@ -381,7 +379,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 </section>
 
 <div class="bottom-actions no-print"><button class="btn primary" id="summaryBtn" type="button">요약정리</button><button class="btn" id="printBtn">인쇄 · PDF 저장</button><button class="btn" id="saveBtn">사례 저장(JSON)</button><button class="btn" id="loadBtn">사례 불러오기</button><input type="file" id="file" accept=".json,application/json" hidden><button class="btn" id="resetBtn">전체 초기화</button><span id="toast" class="copyStatus"></span></div>
-<div class="foot">약관 근거: 첨부 「특순통치(1).pdf」 별표46, 「상급특순통치.pdf」 별표46, 「특순통치 주요손상.pdf」 별표65 및 각 가입금액별 지급표. 누적가입 운영규칙: 「특순통치 계산기.xlsx」. 비용기준: 2026-11-19 STEP 3 단일 교육기준표 및 항목별 원자료(상세표 참조). 이 계산기는 개별 고객의 보험금 지급 확정액, 실제 환자 본인부담금, 실손보험 적용 후 순부담금, 현재 계약의 인수승인을 산출하지 않습니다. <b>오선근 CM</b></div>
+<div class="foot">보장범위 및 지급기준은 가입한 상품의 약관상 대상 질병·상해 분류, 치료·수술 정의, 지급단위 및 연간한도에 따릅니다. 치료비 참고자료는 각 치료행위의 출처에서 확인할 수 있습니다. 이 계산기는 실제 보험금 지급액, 환자 본인부담금, 실손보험 적용 후 순부담금 또는 가입 가능 여부를 확정하지 않습니다. <b>오선근 CM</b></div>
 </main>
 <div id="summaryOverlay" class="summary-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
  <div class="summary-dialog">
@@ -449,9 +447,9 @@ function validCombo(){const a=S.plans;return !(a.normal>0&&a.upper>0&&(a.normal>
 function calcRate(plan,id){if(!validCombo())return 0;const amt=S.plans[plan];if(!amt)return 0;const look=plan==='expanded'?EXPANDED_RATES:STANDARD_RATES;const raw=look[amt]?.[id];const amount=(raw&&typeof raw==='object'?raw[S.grade]:raw)||0;const ratio=S.period==='before'&&!(plan==='expanded'&&S.injuryCase==='injury')?.5:1;return amount*ratio;}
 function capFor(plan){if(!S.plans[plan])return 0;return S.plans[plan]*(S.period==='before'&&!(plan==='expanded'&&S.injuryCase==='injury')?.5:1);}
 function planSelect(p){const a=p==='expanded'?[0,2000,3000]:[0,2000,3000,5000,8000,10000];return a.map(n=>`<option value="${n}" ${S.plans[p]===n?'selected':''}>${n?money(n):'미가입'}</option>`).join('');}
-function buildPlans(){const defs=[['normal','특순통치 일반형','별표46 · 순환계질환 52개 분류','단독 최대 1억 / 상급과 중복시 각각 5천'],['upper','상급특순통치','별표46 · 일반형과 동일 코드 / 지정병원 요건','단독 최대 1억 / 일반과 중복시 각각 5천'],['expanded','주요손상및질환형','별표65 · 일반형에서 빠진 40개 분류','확인된 가입금액 2천·3천만원']];$('planGrid').innerHTML=defs.map(([p,name,sub,extra])=>`<div class="plan ${S.plans[p]?'active':''}"><div class="plan-title">${name}</div><div class="plan-sub">${sub}</div><label class="label" for="plan_${p}">가입금액</label><select id="plan_${p}" data-plan="${p}">${planSelect(p)}</select><div class="mono">${extra}</div><div class="scope-hint">${S.plans[p]?'가입중 · 아래 보장범위 표시':'미가입 · 가입금액 선택 시 범위 확인'}</div></div>`).join(''); document.querySelectorAll('[data-plan]').forEach(el=>el.onchange=()=>{S.plans[el.dataset.plan]=Number(el.value);if(!S.plans.normal&&!S.plans.upper&&S.plans.expanded)S.scenario='expanded';else if((S.plans.normal||S.plans.upper)&&!S.plans.expanded)S.scenario='standard';buildPlans();render();});}
+function buildPlans(){const defs=[['normal','특순통치 일반형','순환계질환 52개 분류','단독 최대 1억 / 상급과 중복시 각각 5천'],['upper','상급특순통치','일반형과 동일 질병분류 / 지정병원 요건','단독 최대 1억 / 일반과 중복시 각각 5천'],['expanded','주요손상및질환형','별도 질병·상해 40개 분류','가입금액 2천·3천만원']];$('planGrid').innerHTML=defs.map(([p,name,sub,extra])=>`<div class="plan ${S.plans[p]?'active':''}"><div class="plan-title">${name}</div><div class="plan-sub">${sub}</div><label class="label" for="plan_${p}">가입금액</label><select id="plan_${p}" data-plan="${p}">${planSelect(p)}</select><div class="mono">${extra}</div><div class="scope-hint">${S.plans[p]?'가입중 · 아래 보장범위 표시':'미가입 · 가입금액 선택 시 범위 확인'}</div></div>`).join(''); document.querySelectorAll('[data-plan]').forEach(el=>el.onchange=()=>{S.plans[el.dataset.plan]=Number(el.value);if(!S.plans.normal&&!S.plans.upper&&S.plans.expanded)S.scenario='expanded';else if((S.plans.normal||S.plans.upper)&&!S.plans.expanded)S.scenario='standard';buildPlans();render();});}
 function coverageGroup(groups){return '<div class="scope-groups">'+Object.entries(groups).map(([title,codes])=>`<div class="scope-group"><strong>${escapeHTML(title)}</strong><div class="scope-items">${Object.entries(codes).map(([code,name])=>`<span class="scope-code"><b>${code}</b>${escapeHTML(name)}</span>`).join('')}</div></div>`).join('')+'</div>';}
-function renderCoverage(){const n=S.plans.normal||S.plans.upper,e=S.plans.expanded;$('normalCoverage').classList.toggle('active',!!n);$('expandedCoverage').classList.toggle('active',!!e);$('stdCodeList').innerHTML=n?coverageGroup(STD_GROUPS):'<div class="range-empty">일반형 또는 상급형 가입금액을 선택하면 전체 52개 코드와 질병명이 나타납니다.</div>';$('expCodeList').innerHTML=e?coverageGroup(EXP_GROUPS):'<div class="range-empty">주요손상및질환형 가입금액을 선택하면 일반형과 다른 40개 코드와 질병명이 나타납니다.</div>';const bad=!validCombo(),both=!!(S.plans.normal&&S.plans.upper);const title=bad?'가입금액 조정 필요':both?'일반형·상급형 동시가입':'가입금액 안내';const info=bad?'일반형과 상급형을 함께 가입할 때는 각 담보를 5,000만원 이하로 조정해야 합니다. 현재 금액으로는 계산할 수 없습니다.':both?'현재 일반형 '+money(S.plans.normal)+' / 상급형 '+money(S.plans.upper)+' 가입. 함께 가입하면 각 담보 최대 5,000만원까지 선택할 수 있습니다.':'일반형 또는 상급형만 가입하면 해당 담보는 최대 1억원, 두 담보를 함께 가입하면 각각 최대 5,000만원까지 선택할 수 있습니다.';$('limitNotice').innerHTML='<div class="note '+(bad?'danger':both?'ok':'note')+'"><strong>'+title+'</strong> · '+info+'<span class="smallprint"> (첨부 엑셀 기준 · 실제 가입한도는 최신 인수지침 확인)</span></div>';}
+function renderCoverage(){const n=S.plans.normal||S.plans.upper,e=S.plans.expanded;$('normalCoverage').classList.toggle('active',!!n);$('expandedCoverage').classList.toggle('active',!!e);$('stdCodeList').innerHTML=n?coverageGroup(STD_GROUPS):'<div class="range-empty">일반형 또는 상급형 가입금액을 선택하면 전체 52개 코드와 질병명이 나타납니다.</div>';$('expCodeList').innerHTML=e?coverageGroup(EXP_GROUPS):'<div class="range-empty">주요손상및질환형 가입금액을 선택하면 일반형과 다른 40개 코드와 질병명이 나타납니다.</div>';const bad=!validCombo(),both=!!(S.plans.normal&&S.plans.upper);const title=bad?'가입금액 조정 필요':both?'일반형·상급형 동시가입':'가입금액 안내';const info=bad?'일반형과 상급형을 함께 가입할 때는 각 담보를 5,000만원 이하로 조정해야 합니다. 현재 금액으로는 계산할 수 없습니다.':both?'현재 일반형 '+money(S.plans.normal)+' / 상급형 '+money(S.plans.upper)+' 가입. 함께 가입하면 각 담보 최대 5,000만원까지 선택할 수 있습니다.':'일반형 또는 상급형만 가입하면 해당 담보는 최대 1억원, 두 담보를 함께 가입하면 각각 최대 5,000만원까지 선택할 수 있습니다.';$('limitNotice').innerHTML='<div class="note '+(bad?'danger':both?'ok':'note')+'"><strong>'+title+'</strong> · '+info+'<span class="smallprint"> (실제 가입한도는 상품별 인수기준 확인)</span></div>';}
 function moneyCell(n){return n?fmt(n):'<span class="dim">—</span>';}
 function renderBenefits(){
   let current='',html='';
@@ -547,8 +545,7 @@ function buildProof(){
   return `<tr><td>${escapeHTML(it.name)}</td><td>${money(r.normal)} / ${money(r.high)}<div class="smallprint">${escapeHTML(r.basis)} / ${escapeHTML(r.upper)}</div></td><td>${escapeHTML(r.scope)}</td><td><a href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">원문</a></td></tr>`;
  }).join('');
 }
-/* 암통치 확정 화면 규칙 적용: 분류별 개별 표·머리글 반복·모바일 첫 열 고정.
-   계산 결과 원본 tbody는 그대로 보존하고 시각적 표만 생성한다. */
+
 function paintCategoryTables(sourceId,targetId){
   const source=$(sourceId), target=$(targetId);
   if(!source||!target)return;
@@ -623,8 +620,7 @@ function setup(){
   render();
   initializeSummary();
 }
-/* v9 요약정리: 기존 계산기의 S/ITEMS/REFERENCES/calcRate/sim에서 읽기만 하며
-   지급요율, 가입금액, 연간 한도 또는 치료비를 다시 정의하지 않음. */
+
 let summaryBusy=false;
 const SUM_ORDER=['검사','주요치료','수술','재활'];
 function summaryData(){
@@ -671,7 +667,7 @@ function renderSummaryPreview(d){
   <div class="rs-plan-grid"><div class="rs-plan-box ${d.plans.normal?'active':''}"><div class="rs-label">특순통치 일반형</div><strong>${sumValue(d.plans.normal)}</strong></div><div class="rs-plan-box ${d.plans.upper?'active':''}"><div class="rs-label">상급·권역센터형</div><strong>${sumValue(d.plans.upper)}</strong></div><div class="rs-plan-box ${d.plans.expanded?'active':''}"><div class="rs-label">주요손상및질환형</div><strong>${sumValue(d.plans.expanded)}</strong></div></div>
   <div class="rs-condition"><div><span>보험 계약 경과</span><b>${period}</b></div><div><span>주요손상형 지급구분</span><b>${cond}</b></div><div><span>상급형 의료기관 요건</span><b>${d.eligibleUpper?'충족 가정':'미충족 가정'}</b></div><div><span>주요손상형 수술</span><b>${d.grade}종 기준</b></div></div>
   <div class="rs-section-head">담보별 보장범위 <small>약관상 대상코드 분류</small></div>
-  <div class="rs-coverage"><div><b>일반형 · 상급형 ｜ 별표46 (52개)</b><p>뇌출혈·뇌경색, 협심증·심근경색, 심부전·부정맥 등. 상급형은 지정 의료기관 요건이 추가됩니다.</p></div><div><b>주요손상및질환형 ｜ 별표65 (40개)</b><p>고혈압·죽상경화증·1도 방실차단·두개내손상(S06)·흉부 혈관/심장 손상(S25/S26) 등. 일반형과 다른 코드 범위입니다.</p></div></div>
+  <div class="rs-coverage"><div><b>일반형 · 상급형 ｜ 대상 질병 52개 분류</b><p>뇌출혈·뇌경색, 협심증·심근경색, 심부전·부정맥 등. 상급형은 지정 의료기관 요건이 추가됩니다.</p></div><div><b>주요손상및질환형 ｜ 별도 40개 분류</b><p>고혈압·죽상경화증·1도 방실차단·두개내손상(S06)·흉부 혈관/심장 손상(S25/S26) 등. 일반형과 다른 코드 범위입니다.</p></div></div>
   <div class="rs-section-head">행위별 보장금액 <small>단위: 만원 · STEP 2 산식 동일</small></div>
   <table class="rs-table"><colgroup><col style="width:38%"><col style="width:13%"><col style="width:13%"><col style="width:14%"><col style="width:22%"></colgroup><thead><tr><th>치료행위</th><th>일반형</th><th>상급형</th><th>주요손상형</th><th>일반+상급</th></tr></thead><tbody>${summaryRowsByGroup(d.benefit,renderSummaryBenefitRow)}</tbody></table>
   <div class="rs-note" style="margin-top:10px">일반형·상급형 대상 질병코드와 주요손상및질환형 대상코드는 서로 다릅니다. 위 <b>일반+상급</b>은 지정병원 조건 및 동일 대상 질병의 지급요건 충족을 가정한 개별 행위 합산이며, 주요손상형과 동시에 더하지 않습니다. 연간 총지급한도: 일반 ${money(d.caps.normal)} / 상급 ${money(d.caps.upper)} / 주요손상 ${money(d.caps.expanded)}.</div>
@@ -700,8 +696,6 @@ function openSummary(){
 }
 function closeSummary(){if(summaryBusy)return;$('summaryOverlay').hidden=true;document.body.style.overflow='';}
 function printSummary(){renderSummaryPreview(summaryData());document.body.classList.add('print-summary');window.print();}
-
-// PNG 파일은 외부 CDN/화면 캡처 패키지 없이 Canvas로 A4 2480×3508 픽셀 두 장을 직접 생성.
 function summaryCanvas(d,pageNo){
  const canvas=document.createElement('canvas');canvas.width=2480;canvas.height=3508;
  const ctx=canvas.getContext('2d');ctx.scale(canvas.width/794,canvas.height/1122);
@@ -727,8 +721,8 @@ function summaryCanvas(d,pageNo){
   conditions.forEach(([k,v],i)=>{const x=48+(i%2)*354,y=253+Math.floor(i/2)*29;rect(x,y,344,23,C.light,C.line,4);txt(k,x+9,y+16,10,false,C.muted);txt(v,x+335,y+16,10,true,C.ink,'right');});
   section('담보별 보장범위',335,'서로 다른 대상코드');
   rect(48,346,344,76,C.light,C.line,6);rect(402,346,344,76,C.light,C.line,6);
-  txt('일반·상급형 · 별표46 / 52개 분류',59,366,12,true);multiline('뇌출혈·뇌경색, 협심증·심근경색, 심부전·부정맥 등',59,386,320,10,15,2);
-  txt('주요손상및질환형 · 별표65 / 40개 분류',413,366,12,true);multiline('고혈압·죽상경화증·1도 방실차단·S06/S25/S26 등',413,386,320,10,15,2);
+  txt('일반·상급형 / 52개 분류',59,366,12,true);multiline('뇌출혈·뇌경색, 협심증·심근경색, 심부전·부정맥 등',59,386,320,10,15,2);
+  txt('주요손상형 / 40개 분류',413,366,12,true);multiline('고혈압·죽상경화증·1도 방실차단·S06/S25/S26 등',413,386,320,10,15,2);
   section('행위별 보장금액',449,'단위: 만원 / STEP 2 지급표');
   const xs=[48,310,398,485,572,746],headers=['치료행위','일반','상급','주요손상','일반+상급'];
   rect(48,461,698,25,C.light);headers.forEach((h,i)=>txt(h,i===0?xs[0]+7:xs[i+1]-9,478,10,true,C.muted,i===0?'left':'right'));
@@ -780,7 +774,6 @@ function summaryCanvas(d,pageNo){
 }
 function canvasBlob(canvas){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('이미지 변환 실패')),'image/png'));}
 function zipStore(files){
- // 오프라인 ZIP store: 2개 PNG, 사전 압축된 PNG 자체를 압축 없이 ZIP에 담음.
  let chunks=[],entries=[],offset=0;const enc=new TextEncoder();
  const push=(blobPart)=>{chunks.push(blobPart);offset+=blobPart.byteLength;};
  function u16(v){return Uint8Array.of(v&255,(v>>>8)&255)}
