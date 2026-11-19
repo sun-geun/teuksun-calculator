@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.4 · 특순통치</title>
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>특순통치 3단계 계산기 v9.5 · 특순통치</title>
 <style>.nonpay-tip{display:block;color:#856752;font-size:10px;line-height:1.5;margin-top:5px;max-width:210px;border-top:1px dashed #e7d9c4;padding-top:5px}.nonpay-proof{color:#8c624a;margin-top:6px;font-size:11px;line-height:1.5;padding:6px 8px;border-left:2px solid #dfb39c;background:#fcf7f1}.cost-method{min-width:210px}
 
 :root{--red:#ef3b24;--redsoft:#fff0eb;--ink:#1d2b3c;--muted:#657387;--line:#e2e7ef;--bg:#f5f7fa;--white:#fff;--soft:#f8fafc;--green:#0f766e;--warn:#b45309}
@@ -312,7 +312,14 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 .simple-case-row span{font-size:12px;color:#53657a}
 .simple-case-row strong{font-size:19px;white-space:nowrap}
 .simple-case-row .special{color:#c73d27}
+.simple-card-guide{font-size:12px;color:#41576e;line-height:1.6;margin:0 0 13px}
 .simple-help{font-size:12px;color:#657387;line-height:1.6;margin:14px 0}
+.simple-case-explain{font-size:11px;color:#53657a;line-height:1.5;padding:1px 0 4px}
+.simple-case-formula{display:block;font-weight:400;color:#8290a1;font-size:11px;margin-top:2px;line-height:1.4}
+.simple-case-sublabel{display:block;font-size:11px;color:#77879a;margin-top:3px;line-height:1.45}
+.simple-case-row{align-items:start}
+.simple-case-row>div{min-width:0}
+.simple-case-row strong{flex-shrink:0}
 .simple-details{margin-top:6px}
 .focus-include{display:inline-flex;align-items:center;gap:7px;font-weight:500!important;font-size:12px!important;margin:7px 0 0!important;color:#53657a!important;cursor:pointer}
 .focus-include input{accent-color:#ef3b24}
@@ -329,7 +336,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 @media(max-width:740px){.simple-inputs,.simple-cost-grid{grid-template-columns:1fr}.simple-benefit{padding:15px}.simple-benefit strong{font-size:23px}.simple-case{padding:16px}.simple-case-cost strong{font-size:24px}}
 </style></head><body>
 <div class="top"><div class="top-inner"><div class="brand">보험 <em>· 특순통치</em> / MERITZ FIRE &amp; MARINE</div><div class="maker">오선근 CM</div></div></div>
-<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 치료비 간편 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.4 · 3단계</div></div></div>
+<main class="shell"><div class="intro"><div><div class="over">특순통치 · 교육·상담용</div><h1>특정순환계질환 통합치료비 계산기</h1><p>담보 선택 → 행위별 보장금액 → 치료비 간편 비교</p></div><div class="intro-actions"><button class="btn primary summary-launch" id="summaryTopBtn" type="button">요약정리</button><div class="version">v9.5 · 3단계</div></div></div>
 <nav class="quick no-print"><a href="#step1"><b>STEP 01</b>담보 선택·보장범위</a><a href="#step2"><b>STEP 02</b>행위별 보장금액</a><a href="#step3"><b>STEP 03</b>치료비 비교</a></nav>
 <section id="step1" class="step"><div class="stephead"><h2><span>STEP 01</span>담보 선택</h2><span class="muted">가입금액 선택 즉시 보장코드가 표시됩니다</span></div>
 <div id="planGrid" class="plan-grid"></div><div id="limitNotice" role="status"></div>
@@ -348,13 +355,14 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 <section id="step3" class="step">
 <div class="stephead"><h2><span>STEP 03</span>치료비와 보험금 비교</h2><span class="muted">치료 1개 선택 · 결과 자동 계산</span></div>
 <div class="simple-inputs">
-<div class="field"><label for="focusTreatment">치료항목 선택</label><select id="focusTreatment" class="simple-select"></select><label class="focus-include"><input type="checkbox" id="includeFocused" checked> 이 치료를 요약본에 포함</label></div>
+<div class="field"><label for="focusTreatment">치료항목 선택</label><select id="focusTreatment" class="simple-select"></select></div>
 <div class="field"><label for="coverageScenario">보험금 계산 담보</label><select id="coverageScenario" class="simple-select"><option value="standard">일반형 + 상급형</option><option value="expanded">주요손상및질환형</option></select></div>
 </div>
 <div class="simple-benefit"><div><span>STEP 2 예상 정액보험금</span><small>가입한 담보의 약관상 지급요건 충족 가정</small></div><strong id="singleBenefit">—</strong></div>
+<p class="simple-card-guide">아래는 <strong>치료비 자체</strong>와, 그 치료비에 가정 부담률을 적용한 <strong>환자부담 비교 금액</strong>입니다. 실제 병원에서 내야 할 금액을 예측한 결과는 아닙니다.</p>
 <div id="simpleCompare" class="simple-cost-grid" aria-live="polite"></div>
 <details class="codes summary-select-details" id="summarySelectDetails">
- <summary>요약본에 포함할 치료행위 <strong id="summarySelectedCount" class="summary-select-count">1개 선택</strong></summary>
+ <summary>요약본에 넣을 치료행위 선택 <strong id="summarySelectedCount" class="summary-select-count">1개 선택</strong></summary>
  <p class="smallprint">화면에서는 치료 하나만 비교하고, 요약본에는 필요한 치료행위를 여러 개 선택할 수 있습니다.</p>
  <div class="summary-select-actions no-print">
    <button type="button" class="btn" id="summarySelectAll">전체 12개 선택</button>
@@ -362,7 +370,7 @@ body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
  </div>
  <div id="summarySelectionList" class="summary-select-list" aria-label="요약본 치료행위 복수선택"></div>
 </details>
-<p class="simple-help">산특 적용·미적용 금액은 급여 전액에 가정 부담률을 적용한 교육용 계산입니다. 실제 환자부담액과 다를 수 있습니다.</p>
+<p class="simple-help">산정특례는 인정된 질환·기간·급여비용에만 적용됩니다. 비급여·선별급여 등 실제 청구항목은 여기서 계산하지 않습니다. <strong>특히 CRRT를 받는다고 산특 5%가 자동 적용되는 것은 아닙니다.</strong></p>
 <details class="codes simple-details"><summary>치료비 근거·계산기준 자세히 보기</summary>
 <div id="simpleProof" class="smallprint" style="margin-top:12px"></div>
 <p class="smallprint">일반 사례: P50 또는 평균. 고액 사례: 실측 P75 또는 평균×1.5 교육용 가정. CRRT는 공단 지급액을 환산한 비용 모델, 저체온요법은 ICU 환자군 대리통계입니다. 산특 대상 질환·기간·급여요건은 별도 확인해야 합니다.</p>
@@ -504,7 +512,6 @@ function renderSummarySelection(){
    const item=ITEMS.find(x=>x.id===id);
    return `<label class="summary-select-label"><input type="checkbox" data-summary-check="${id}" ${S.selected[id]?'checked':''}><span>${escapeHTML(item.name)}</span></label>`;
  }).join('');
- $('includeFocused').checked=!!S.selected[S.focusTreatment];
  document.querySelectorAll('[data-summary-check]').forEach(input=>{
    input.onchange=e=>{S.selected[input.dataset.summaryCheck]=input.checked;renderSummarySelection();};
  });
@@ -518,12 +525,17 @@ function renderCosts(){
  $('focusTreatment').value=id;$('coverageScenario').value=S.scenario;
  $('singleBenefit').textContent=money(pay);
  const card=(tier,gross,label)=>`<div class="simple-case ${tier==='고액 사례'?'high':''}">
-  <div class="simple-case-header"><b>${tier}</b><span>${escapeHTML(label)}</span></div>
-  <div class="simple-case-cost"><small>참고 치료비</small><strong>${money(gross)}</strong></div>
-  <div class="simple-case-rows">
-   <div class="simple-case-row"><span>${specialRate===null?'산특 비교':'산특 적용 가정 (5%)'}</span><strong class="special">${specialRate===null?'비적용':money(Math.round(gross*specialRate*10)/10)}</strong></div>
-   <div class="simple-case-row"><span>산특 미적용 가정 (${Math.round(ordinaryRate*100)}%)</span><strong>${money(Math.round(gross*ordinaryRate*10)/10)}</strong></div>
-  </div>
+ <div class="simple-case-header"><b>${tier}</b><span>${escapeHTML(label)}</span></div>
+ <div class="simple-case-cost">
+  <small>참고 진료비 · ${r.kind==='inpatient'?'입원 1건':'검사·외래 시행횟수'} 기준</small>
+  <strong>${money(gross)}</strong>
+  <span class="simple-case-sublabel">${r.kind==='inpatient'?'입원 전체비용 통계 또는 교육용 추정':'검사·외래 행위료 기준 사례'}</span>
+ </div>
+ <div class="simple-case-rows">
+  <div class="simple-case-explain"><b>아래 금액은 환자부담액을 가정한 산술 예시입니다.</b></div>
+  <div class="simple-case-row"><div><span>산특 적용 가정 (5%)</span><small class="simple-case-formula">${specialRate===null?'외래재활은 이 항목을 계산하지 않음':`${money(gross)} × 5%`}</small></div><strong class="special">${specialRate===null?'해당 없음':money(Math.round(gross*specialRate*10)/10)}</strong></div>
+  <div class="simple-case-row"><div><span>산특 미적용 가정 (${Math.round(ordinaryRate*100)}%)</span><small class="simple-case-formula">${money(gross)} × ${Math.round(ordinaryRate*100)}%</small></div><strong>${money(Math.round(gross*ordinaryRate*10)/10)}</strong></div>
+ </div>
  </div>`;
  $('simpleCompare').innerHTML=card('일반 사례',r.normal,r.basis)+card('고액 사례',r.high,r.upper);
  $('simpleProof').innerHTML=`<strong>${escapeHTML(item.name)}</strong> · ${escapeHTML(r.period)}<p>${escapeHTML(r.scope)}</p><p><a href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">원자료 보기</a></p>`;
@@ -579,7 +591,6 @@ function setup(){
   $('injuryCase').onchange=e=>{S.injuryCase=e.target.value;render();};
   $('focusTreatment').innerHTML=ITEMS.map(x=>`<option value="${x.id}">${escapeHTML(x.name)}</option>`).join('');
   $('focusTreatment').onchange=e=>{S.focusTreatment=e.target.value;renderCosts();};
-  $('includeFocused').onchange=e=>{S.selected[S.focusTreatment]=e.target.checked;renderSummarySelection();};
   $('summarySelectAll').onclick=()=>{S.selected=Object.fromEntries(SEQ.map(id=>[id,true]));renderSummarySelection();};
   $('summarySelectNone').onclick=()=>{S.selected={};renderSummarySelection();};
   $('coverageScenario').onchange=e=>{S.scenario=e.target.value;renderCosts();};
